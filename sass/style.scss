@@ -1,0 +1,162 @@
+$primary-color:#acaaaa;
+$colorSecundario:black;
+$colorTerciario:white;
+$font-color:rgb(255, 255, 255);
+
+$box-shadow: 0 2px 10px 0 rgba(0,0,0,0.6);
+
+$limit:10;
+$unit: 8px;
+
+@function size ($value){
+    @return $value * $unit
+}
+
+@mixin reset {
+    padding: 0;
+    margin: 0;
+}
+
+@mixin btn($background-color, $color, $bold){
+    background-color: $background-color;
+    color: $color;
+    border-radius: 50px;
+    padding: 20px 30px;
+    text-align: center;
+    display: flex;
+    text-align: center;
+    justify-content: space-evenly;
+
+    @if($bold == 'true'){
+        font-weight: bolder;
+    }
+}
+.btn{
+    &.btn-cta{
+        @include btn(#a7a4b8, $colorSecundario, 'true' );
+        &:hover{
+            @include btn($colorSecundario,$colorTerciario,'true');
+            box-shadow: $box-shadow;
+        }
+    }
+
+    &:hover{
+        @include btn($colorTerciario,$colorSecundario ,'true' )
+    }
+}
+
+*{
+    @include reset();
+    box-sizing: border-box;
+}
+
+body{
+    background-color: $primary-color;
+    color: $font-color;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+    color: $colorSecundario;
+    text-decoration: none;
+}
+
+h2{
+    font-weight: bolder;
+    font-size: size(6);
+}
+
+h3{
+    font-weight: lighter;
+    font-size: size(3);
+}
+.container{
+    background-color: white;
+    margin: 100px auto;
+    width: 1280px;
+    padding: 50px;
+    box-shadow: 0 0 20px 2px rgba(0,0,0,1);
+    border-radius: 10px;
+    background-image: url(../img/bg-img.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+ul{
+    @include reset();
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    li{
+        a{
+            @include btn(rgba(0, 0, 0, 0), $colorSecundario, 'true' );
+            &:hover{
+                @include btn ($colorSecundario, $colorTerciario, 'false');
+                box-shadow:$box-shadow;
+            }
+        }
+        
+    }
+}
+
+header{
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    .col{
+        width: 50%;
+    }
+
+    .col-30{
+        width: 30%;
+    }
+
+    .col-70{
+        width: 70%;
+    }
+}
+
+.m-auto{
+    margin: 0 auto;
+}
+
+@for $i from 1 to $limit{
+    .p-#{$i}{
+        padding: $i * $unit;
+    }
+}
+@for $i from 1 to $limit{
+    .py-#{$i}{
+        padding: $i * $unit 0;
+    }
+}
+@for $i from 1 to $limit{
+    .m-#{$i}{
+        margin: $i * $unit;
+    }
+}
+@for $i from 1 to 4{
+    .w-#{$i}{
+        width: $i * 25%;
+    }
+}
+
+.prices{
+    .prev{
+        font-size: size(2);
+        font-weight: bolder;
+        color: $font-color;
+        text-decoration: line-through;
+    }
+    .now{
+        font-size: size(5);
+        font-weight: bolder;
+    }
+}
